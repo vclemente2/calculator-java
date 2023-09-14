@@ -1,49 +1,53 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 public class Calculator extends BaseCalculator{
 	private MathOperation currentOperation;
-	private List<MathOperation> resultHistory;
+	private Deque<MathOperation> resultHistory;
 	
 	public Calculator() {
-		this.resultHistory = new ArrayList<MathOperation>();
+		this.resultHistory = new ArrayDeque<MathOperation>();
 	}
 	
 	@Override
 	public void add(double firstNumber, double secondNumber) {
 		super.add(firstNumber, secondNumber);
 		this.setCurrentOperation(MathOperation.generate(firstNumber, secondNumber, this.getResult(), "add"));
-		this.insertResultHistory(this.getCurrentOperation());
+		this.insertInResultHistory(this.getCurrentOperation());
 	}
 	
 	@Override
 	public void subtract(double firstNumber, double secondNumber) {
 		super.subtract(firstNumber, secondNumber);
-		this.setCurrentOperation(MathOperation.generate(firstNumber, secondNumber, this.getResult(), "subtract"));;
-		this.insertResultHistory(this.getCurrentOperation());
+		this.setCurrentOperation(MathOperation.generate(firstNumber, secondNumber, this.getResult(), "subtract"));
+		this.insertInResultHistory(this.getCurrentOperation());
 	}
 	
 	@Override
 	public void multiply(double firstNumber, double secondNumber) {
 		super.multiply(firstNumber, secondNumber);
-		this.setCurrentOperation(MathOperation.generate(firstNumber, secondNumber, this.getResult(), "multiply"));;
-		this.insertResultHistory(this.getCurrentOperation());
+		this.setCurrentOperation(MathOperation.generate(firstNumber, secondNumber, this.getResult(), "multiply"));
+		this.insertInResultHistory(this.getCurrentOperation());
 	}
 	
 	@Override
-	public void divide(double firstNumber, double secondNumber) {
-		super.divide(firstNumber, secondNumber);
-		this.setCurrentOperation(MathOperation.generate(firstNumber, secondNumber, this.getResult(), "divide"));;
-		this.insertResultHistory(this.getCurrentOperation());
+	public void divide(double firstNumber, double secondNumber) throws ArithmeticException{
+		try {
+			super.divide(firstNumber, secondNumber);
+			this.setCurrentOperation(MathOperation.generate(firstNumber, secondNumber, this.getResult(), "divide"));
+			this.insertInResultHistory(this.getCurrentOperation());
+		} catch(ArithmeticException e) {
+			throw e;
+		}
 	}
 	
-	private void insertResultHistory(MathOperation operation) {
-		this.getResultHistory().add(operation);
+	private void insertInResultHistory(MathOperation operation) {
+		this.getResultHistory().push(operation);
 	}
 	
-	public List<MathOperation> getResultHistory(){
+	public Deque<MathOperation> getResultHistory(){
 		return this.resultHistory;
 	}
 
