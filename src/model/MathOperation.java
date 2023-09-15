@@ -12,7 +12,7 @@ public class MathOperation {
 		this.result = result;
 		this.operationType = operationType;
 	}
-	
+
 	public static MathOperation generate(double firstNumber, double secondNumber, double result, String operationType) {
 		return new MathOperation(firstNumber, secondNumber, result, operationType);
 	}

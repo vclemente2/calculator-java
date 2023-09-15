@@ -16,11 +16,9 @@ public abstract class BaseCalculator {
 	};
 	
 	public void divide(double firstNumber, double secondNumber) throws ArithmeticException{
-		try{
-			this.setResult(firstNumber / secondNumber);
-		} catch(ArithmeticException exception) {
+		if (secondNumber == 0)
 			throw new ArithmeticException("O divisor não pode ser zero.");
-		}
+		this.setResult(firstNumber / secondNumber);
 	};
 	
 	public double getResult() {

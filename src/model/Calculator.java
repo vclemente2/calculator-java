@@ -39,7 +39,9 @@ public class Calculator extends BaseCalculator{
 			this.setCurrentOperation(MathOperation.generate(firstNumber, secondNumber, this.getResult(), "divide"));
 			this.insertInResultHistory(this.getCurrentOperation());
 		} catch(ArithmeticException e) {
-			throw e;
+			System.out.println("Erro: " + e.getMessage());
+		} catch(Exception e) {
+			System.out.println("Erro: Erro inesperado, favor refaça a operação.");
 		}
 	}
 	

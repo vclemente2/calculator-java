@@ -1,24 +1,31 @@
 package controller;
 
+import java.util.Scanner;
+
 import model.Calculator;
 import view.CalculatorView;
 
 public class Teste {
 	public static void main(String[] args) {
 		Calculator calculator = new Calculator();
+		Scanner scan = new Scanner(System.in);
+		
+		
 		
 		calculator.add(2, 2);
-		CalculatorView.showResult(calculator.getCurrentOperation());
+//		CalculatorView.showResult(calculator.getCurrentOperation());
 		
 		calculator.subtract(53, 4);
-		CalculatorView.showResult(calculator.getCurrentOperation());
+//		CalculatorView.showResult(calculator.getCurrentOperation());
 		
 		calculator.multiply(5, 4);
-		CalculatorView.showResult(calculator.getCurrentOperation());
+//		CalculatorView.showResult(calculator.getCurrentOperation());
 		
-		calculator.divide(8, 4);
-		CalculatorView.showResult(calculator.getCurrentOperation());
-
+//			calculator.add(scan.nextDouble(), scan.nextDouble());
+//		CalculatorView.showResult(calculator.getCurrentOperation());
+		
+		
+		CalculatorView.showHistoryResults(calculator.getResultHistory());
 		
 //		for(MathOperation operation: calculator.getResultHistory()) {
 //			System.out.print(operation.getFirstNumber());
@@ -29,7 +36,7 @@ public class Teste {
 //		}
 		
 		
-//		CalculatorView.showCalculator();
+		CalculatorView.showCalculator();
 
 		
 	}
