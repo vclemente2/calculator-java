@@ -30,6 +30,14 @@ public enum Operation {
 		throw new IllegalArgumentException("Operação não encontrada para o nome: " + operationName);
 	}
 	
+	public static boolean validadeSymbol(String symbol) {
+		for(Operation operation: values()) {
+			if (operation.getOperationSymbol().equals(symbol))
+				return true;
+		}
+		return false;
+	}
+	
 	public String getOperationSymbol() {
 		return this.operationSymbol;
 	}

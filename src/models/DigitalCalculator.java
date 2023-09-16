@@ -1,13 +1,13 @@
-package model;
+package models;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-public class Calculator extends BaseCalculator{
+public class DigitalCalculator extends Calculator{
 	private MathOperation currentOperation;
 	private Deque<MathOperation> resultHistory;
 	
-	public Calculator() {
+	public DigitalCalculator() {
 		this.resultHistory = new ArrayDeque<MathOperation>();
 	}
 	

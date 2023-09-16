@@ -1,14 +1,14 @@
-package view;
+package views;
 
 import java.util.Deque;
 
 import enums.Operation;
-import model.MathOperation;
+import models.MathOperation;
 
 public class CalculatorView {
 	
 	public static void showCalculator() {
-		System.out.println(CalculatorView.usageOrientation());
+		System.out.print(CalculatorView.usageOrientation());
 		System.out.println(CalculatorView.template());
 	}
 	
