@@ -43,33 +43,24 @@ public class CalculatorController {
 			while(true){
 				System.out.println("Erro: " + e.getMessage() + "\n");
 				System.out.println("Pressione enter para reiniciar...");
-				try {
-					System.in.read();					
-				} catch(IOException f) {
-					System.out.println(f);
-				}
+				this.input.nextLine();
+				this.input.nextLine();
 				break;
 			}
 		} catch(InputMismatchException e) {
 			while(true) {
 				System.out.println("Erro: Input inválido. O valor deve ser numérico.\n");
 				System.out.println("Pressione enter para reiniciar...");
-				try {
-					System.in.read();					
-				} catch(IOException f) {
-					System.out.println(f);
-				}
+				this.input.nextLine();
+				this.input.nextLine();
 				break;
 			}
 		} catch(Exception e) {
 			while(true) {
 				System.out.println("Erro: Erro inesperado\n");
 				System.out.println("Pressione enter para reiniciar...");
-				try {
-					System.in.read();					
-				} catch(IOException f) {
-					System.out.println(f.getMessage());
-				}
+				this.input.nextLine();
+				this.input.nextLine();
 				break;
 			}
 		}
