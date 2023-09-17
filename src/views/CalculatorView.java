@@ -1,6 +1,7 @@
 package views;
 
 import java.util.Deque;
+import java.util.Optional;
 
 import enums.Operation;
 import models.MathOperation;
@@ -8,8 +9,11 @@ import models.MathOperation;
 public class CalculatorView {
 	
 	public static void showCalculator() {
-		System.out.print(CalculatorView.usageOrientation());
 		System.out.println(CalculatorView.template());
+	}
+	
+	public static void showUsageOrientation() {
+		System.out.print(CalculatorView.usageOrientation());
 	}
 	
 	public static void showResult(MathOperation mathOperation) {
@@ -25,6 +29,18 @@ public class CalculatorView {
 		for(MathOperation mathOperation: resultHistory) {
 			showResult(mathOperation);
 		}
+	}
+	
+	public static void printExceptionMessage(String message) {
+		Optional<String> optional = Optional.ofNullable(message);
+		message = optional.orElse("Erro inesperado.");
+		
+		System.out.println("Erro: "+ message + "\n");
+		System.out.println("Pressione enter para reiniciar...");
+	}
+	
+	public static void print(String message) {
+		System.out.println(message);
 	}
 	
 	private static String usageOrientation() {
@@ -43,17 +59,21 @@ public class CalculatorView {
 	}
 	
 	private static String template() {
-		return 	"  _______________________\n" +
-				" |  7  |  8  |  9  |  +  |\n" +
-				" |_____|_____|_____|_____|\n" +
-				" |  4  |  5  |  6  |  -  |\n" +
-				" |_____|_____|_____|_____|\n" +
-				" |  1  |  2  |  3  |  *  |\n" +
-				" |_____|_____|_____|_____|\n" +
-				" |  .  |  0  |  ⏎  |  /  |\n" +
-				" |_____|_____|_____|_____|\n" +
-				"       |  H  |  C  |\n" +
-				"       |_____|_____|\n";
+		return 	"  *****************************************************************************************************\n" +
+				"  | Orientações:                                                                                      |\n" +
+				"  | - Digite o primeiro número e tecle \"Enter\"                                                        |\n" +
+				"  | - Digite o simbolo da operação (+, -, / ou *) e tecle \"Enter\"                                     |\n" +
+				"  | - Digite o segundo número e tecle \"Enter\" para visualizar o resultado no terminal.                |\n" +
+				"  *****************************************************************************************************\n" +
+				"   _______________________\n" +
+				"  |  7  |  8  |  9  |  +  |\n" +
+				"  |_____|_____|_____|_____|\n" +
+				"  |  4  |  5  |  6  |  -  |\n" +
+				"  |_____|_____|_____|_____|\n" +
+				"  |  1  |  2  |  3  |  *  |\n" +
+				"  |_____|_____|_____|_____|\n" +
+				"  |  .  |  0  |  ⏎  |  /  |\n" +
+				"  |_____|_____|_____|_____|\n";
 	}
 	
 	

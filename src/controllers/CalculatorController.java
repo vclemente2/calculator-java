@@ -1,6 +1,5 @@
 package controllers;
 
-import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -18,53 +17,89 @@ public class CalculatorController {
 	}
 	
 	public static void init() {
-		CalculatorController calculatorController = new CalculatorController();
+		CalculatorController controller = new CalculatorController();
 		
 		boolean running = true;
 		
 		while(running) {
+			CalculatorView.showUsageOrientation();
+			
+			
 			CalculatorView.showCalculator();
-			calculatorController.askInput();
+			String[] operationData = controller.askInput();
+			controller.performOperation(Double.valueOf(operationData[0]), Double.valueOf(operationData[1]), operationData[2]);
+			CalculatorView.showResult(controller.calculator.getCurrentOperation());
+			controller.askEnterToContinue();
 			
 		}
 	}
 
-	public void askInput() {
+	public String[] askInput() {
 		try {
-			System.out.print("Primeiro número: ");
+			CalculatorView.print("Primeiro número: ");
 			double firstNumber = this.input.nextDouble();
-			System.out.print("Operação (+, - , * ou /): ");
+			
+			CalculatorView.print("Operação (+, - , * ou /): ");
 			String operationSymbol = this.input.next();
-			Operation operation = Operation.fromOperationSymbol(operationSymbol);
-			System.out.print("Segundo número: ");
+			Operation.fromOperationSymbol(operationSymbol);
+			
+			CalculatorView.print("Segundo número: ");
 			double secondNumber = this.input.nextDouble();
 			
+			String[] operationData = {String.valueOf(firstNumber), String.valueOf(secondNumber), operationSymbol};
+			
+			return operationData;
 		} catch(IllegalArgumentException e) {
 			while(true){
-				System.out.println("Erro: " + e.getMessage() + "\n");
-				System.out.println("Pressione enter para reiniciar...");
+				CalculatorView.printExceptionMessage(e.getMessage());
 				this.input.nextLine();
 				this.input.nextLine();
-				break;
+				return null;
 			}
 		} catch(InputMismatchException e) {
 			while(true) {
-				System.out.println("Erro: Input inválido. O valor deve ser numérico.\n");
-				System.out.println("Pressione enter para reiniciar...");
+				CalculatorView.printExceptionMessage("Input inválido. O valor deve ser numérico.");
 				this.input.nextLine();
 				this.input.nextLine();
-				break;
+				return null;
 			}
 		} catch(Exception e) {
 			while(true) {
-				System.out.println("Erro: Erro inesperado\n");
-				System.out.println("Pressione enter para reiniciar...");
+				CalculatorView.printExceptionMessage(null);
 				this.input.nextLine();
 				this.input.nextLine();
-				break;
+				return null;
 			}
 		}
 	}	
+	
+	public void performOperation(double firstNumber, double secondNumber, String operationSymbol) {
+		switch(operationSymbol) {
+			case "+":
+				this.calculator.add(firstNumber, secondNumber);
+				break;
+			case "-":
+				this.calculator.subtract(firstNumber, secondNumber);
+				break;
+			case "*":
+				this.calculator.multiply(firstNumber, secondNumber);
+				break;
+			case "/":
+				this.calculator.divide(firstNumber, secondNumber);
+				break;
+			default:
+				while(true) {
+					CalculatorView.printExceptionMessage(null);
+					break;
+				}
+		}
+	}
+	
+	public void askEnterToContinue() {
+		CalculatorView.print("Pressione \"Enter\" para continuar...");
+		this.input.nextLine();
+		this.input.nextLine();
+	}
 	
 	public DigitalCalculator getCalculator() {
 		return calculator;
