@@ -3,8 +3,6 @@ package models;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-import views.CalculatorView;
-
 public class DigitalCalculator extends Calculator{
 	private MathOperation currentOperation;
 	private Deque<MathOperation> resultHistory;

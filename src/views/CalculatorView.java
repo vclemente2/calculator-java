@@ -13,10 +13,10 @@ public class CalculatorView {
 	}
 	
 	public static void showMainMenu() {
-		System.out.print(CalculatorView.mainMenuTemplate());
+		System.out.println(CalculatorView.mainMenuTemplate());
 	}
 	
-	public static void showResult(MathOperation mathOperation) {
+	public static void showResult(MathOperation mathOperation){
 		Operation operation = Operation.fromOperationName(mathOperation.getOperationType());
 		
 		System.out.print("\n" + mathOperation.getFirstNumber());
@@ -25,10 +25,8 @@ public class CalculatorView {
 		System.out.println(mathOperation.getResult());
 	}
 	
-	public static void showHistoryResults(Deque<MathOperation> resultHistory) {
-		for(MathOperation mathOperation: resultHistory) {
-			showResult(mathOperation);
-		}
+	public static void showHistoryResults(Deque<MathOperation> resultHistory){
+		resultHistory.stream().forEach(result -> showResult(result));
 	}
 	
 	public static void printExceptionMessage(String message) {
@@ -36,7 +34,6 @@ public class CalculatorView {
 		message = optional.orElse("Erro inesperado.");
 		
 		System.out.println("Erro: "+ message + "\n");
-		System.out.println("Pressione enter para reiniciar...");
 	}
 	
 	public static void print(String message) {
