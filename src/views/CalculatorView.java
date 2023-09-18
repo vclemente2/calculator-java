@@ -26,7 +26,7 @@ public class CalculatorView {
 		System.out.print("\n" + mathOperation.getFirstNumber());
 		System.out.print(" " + operation.getOperationSymbol());
 		System.out.print(" " + mathOperation.getSecondNumber() + " = ");
-		System.out.println(mathOperation.getResult());
+		System.out.println(mathOperation.getResult() + "\n");
 	}
 	
 	public static void showHistoryResults(Deque<MathOperation> resultHistory){
