@@ -9,24 +9,32 @@ import models.MathOperation;
 public class CalculatorView {
 	
 	public static void showCalculatorMenu() {
+		System.out.print(utils.Color.TEXT_CYAN_BRIGHT);
 		System.out.println(CalculatorView.calculatorTemplate());
+		System.out.print(utils.Color.TEXT_RESET);
 	}
 	
 	public static void showMainMenu() {
+		System.out.print(utils.Color.TEXT_CYAN_BRIGHT);
 		System.out.println(CalculatorView.mainMenuTemplate());
+		System.out.print(utils.Color.TEXT_RESET);
 	}
 	
 	public static void showQuitMessage() {
+		System.out.print(utils.Color.TEXT_CYAN_BRIGHT);
 		System.out.println(CalculatorView.quitTemplate());
+		System.out.print(utils.Color.TEXT_RESET);
 	}
 	
 	public static void showResult(MathOperation mathOperation){
 		Operation operation = Operation.fromOperationName(mathOperation.getOperationType());
 		
+		System.out.print(utils.Color.ANSI_BLACK_BACKGROUND);
 		System.out.print("\n" + mathOperation.getFirstNumber());
 		System.out.print(" " + operation.getOperationSymbol());
 		System.out.print(" " + mathOperation.getSecondNumber() + " = ");
 		System.out.println(mathOperation.getResult() + "\n");
+		System.out.print(utils.Color.TEXT_RESET);
 	}
 	
 	public static void showHistoryResults(Deque<MathOperation> resultHistory){
@@ -37,11 +45,15 @@ public class CalculatorView {
 		Optional<String> optional = Optional.ofNullable(message);
 		message = optional.orElse("Erro inesperado.");
 		
+		System.out.print(utils.Color.TEXT_RED);
 		System.out.println("\nErro: "+ message);
+		System.out.print(utils.Color.TEXT_RESET);
 	}
 	
 	public static void print(String message) {
+		System.out.print(utils.Color.TEXT_YELLOW);
 		System.out.println(message);
+		System.out.print(utils.Color.TEXT_RESET);
 	}
 	
 	private static String mainMenuTemplate() {
