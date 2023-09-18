@@ -43,6 +43,10 @@ public class DigitalCalculator extends Calculator{
 		}
 	}
 	
+	public void clearResultHistory() {
+		this.getResultHistory().removeAll(getResultHistory());
+	}
+	
 	private void insertInResultHistory(MathOperation operation) {
 		this.getResultHistory().push(operation);
 	}

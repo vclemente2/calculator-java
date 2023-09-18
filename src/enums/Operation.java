@@ -20,7 +20,7 @@ public enum Operation {
 				return operation;
 			}
 		}
-		throw new InvalidOperationException(operationSymbol.charAt(0));
+		throw new InvalidOperationException(operationSymbol);
 	}
 	
 	public static Operation fromOperationName(String operationName) {
@@ -29,7 +29,7 @@ public enum Operation {
 				return operation;
 			}
 		}
-		throw new InvalidOperationException(operationName);
+		throw new InvalidOperationException();
 	}
 	
 	public static boolean validadeSymbol(String symbol) {

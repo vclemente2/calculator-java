@@ -29,16 +29,57 @@ public class CalculatorController{
 			CalculatorView.showMainMenu();
 			String menuOption = controller.askMainMenuInput();
 			
-			controller.performMenuOption(menuOption);
+			boolean stop = controller.performMenuOption(menuOption);
 			
+			if(stop){
+				running = false;
+			}
 		}
 	}
 	
-	public String askMainMenuInput() {
+	public boolean performMenuOption(String menuOption) {
+		boolean stop = false;
+		switch(menuOption) {
+		case "i":
+			IVoidMethod methodI = new IVoidMethod() {
+				@Override
+				public void execute() {
+					performOptionInit();
+				}
+			};
+			this.executeOption(methodI, "Pressione (R) para retornar ao menu principal ou qualquer tecla para continuar na calculadora");
+			break;
+		case "h":
+			IVoidMethod methodH = new IVoidMethod() {
+				@Override
+				public void execute() {
+					performOptionHistory();
+				}
+			};
+			this.executeOption(methodH, null);
+			break;
+		case "c":
+			IVoidMethod methodC = new IVoidMethod() {
+				@Override
+				public void execute() {
+					performOptionClear();
+				}
+			};
+			
+			this.executeOption(methodC, null);
+			break;
+		case "q":
+			this.performOptionQuit();
+			stop = true;
+		}
+		return stop;
+	}
+	
+	private String askMainMenuInput() {
 		while(true) {
 			try {
 				CalculatorView.print("Digite uma das opções do menu:");
-				String option = this.input.nextLine().toLowerCase();
+				String option = this.getInput().nextLine().toLowerCase();
 				
 				MainMenuOption.fromOptionLetter(option);
 				
@@ -53,17 +94,17 @@ public class CalculatorController{
 		}
 	}
 
-	public String[] askOperationInput() {
+	private String[] askOperationInput() {
 		try {
 			CalculatorView.print("Primeiro número: ");
-			double firstNumber = Double.valueOf(this.input.nextLine()); // AQUI
+			double firstNumber = Double.valueOf(this.getInput().nextLine()); // AQUI
 			
 			CalculatorView.print("Operação (+, - , * ou /): ");
-			String operationSymbol = this.input.nextLine();
+			String operationSymbol = this.getInput().nextLine();
 			Operation.fromOperationSymbol(operationSymbol);
 			
 			CalculatorView.print("Segundo número: ");
-			double secondNumber = Double.valueOf(this.input.nextLine()); // AQUI
+			double secondNumber = Double.valueOf(this.getInput().nextLine()); // AQUI
 			
 			String[] operationData = {String.valueOf(firstNumber), String.valueOf(secondNumber), operationSymbol};
 			
@@ -93,7 +134,7 @@ public class CalculatorController{
 		}
 	}	
 	
-	public void performOperation(double firstNumber, double secondNumber, String operationSymbol) {
+	private void performOperation(double firstNumber, double secondNumber, String operationSymbol) {
 		switch(operationSymbol) {
 			case "+":
 				this.calculator.add(firstNumber, secondNumber);
@@ -115,7 +156,7 @@ public class CalculatorController{
 		}
 	}
 	
-	public void performOptionInit() {
+	private void performOptionInit() {
 		try {
 			CalculatorView.showCalculatorMenu();
 			String[] operationData = this.askOperationInput();
@@ -126,13 +167,34 @@ public class CalculatorController{
 		}catch(Exception e) {}
 	}
 	
-	public void performOptionHistory() {
+	private void performOptionHistory() {
 		try {
-			CalculatorView.showHistoryResults(this.calculator.getResultHistory());
+			if(this.calculator.getResultHistory().size() == 0) 
+				CalculatorView.print("\nNão há operações salvas no histórico...");
+			else
+				CalculatorView.showHistoryResults(this.calculator.getResultHistory());
 		}catch (Exception e) {}
 	}
 	
-	public void executeOption(IVoidMethod method, String message) {
+	private void performOptionClear() {
+		try {
+			if (this.calculator.getResultHistory().size() == 0) {
+				CalculatorView.print("\nO histórico já está vazio...");
+			} else {
+				this.calculator.clearResultHistory();
+				CalculatorView.print("\nHistorico esvaziado com sucesso.");
+			}
+		} catch(Exception e) {
+			CalculatorView.printExceptionMessage(null);
+			this.askEnterToContinue();
+		}
+	}
+	
+	private void performOptionQuit() {
+		CalculatorView.showQuitMessage();
+	}
+	
+	private void executeOption(IVoidMethod method, String message) {
 		while(true) {
 			method.execute();
 			
@@ -141,7 +203,7 @@ public class CalculatorController{
 				break;
 			}
 			else {
-				CalculatorView.print("\n" + message + "\n");	
+				CalculatorView.print(message);	
 				if(this.input.nextLine().equalsIgnoreCase("r"))
 					break;					
 			}
@@ -149,32 +211,9 @@ public class CalculatorController{
 		}
 	}
 	
-	public void performMenuOption(String menuOption) {
-			switch(menuOption) {
-			case "i":
-				IVoidMethod methodI = new IVoidMethod() {
-					@Override
-					public void execute() {
-						performOptionInit();
-					}
-				};
-				this.executeOption(methodI, "Pressione (R) para retornar ao menu principal ou qualquer tecla para continuar na calculadora");
-				break;
-			case "h":
-				IVoidMethod methodH = new IVoidMethod() {
-					@Override
-					public void execute() {
-						performOptionHistory();
-					}
-				};
-				this.executeOption(methodH, null);
-				break;
-			}
-	}
-	
-	public void askEnterToContinue() {
+	private void askEnterToContinue() {
 		CalculatorView.print("\nPressione \"Enter\" para retornar...");
-		this.input.nextLine();
+		this.getInput().nextLine();
 	}
 	
 	public DigitalCalculator getCalculator() {

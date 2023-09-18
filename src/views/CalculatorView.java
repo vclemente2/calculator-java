@@ -16,6 +16,10 @@ public class CalculatorView {
 		System.out.println(CalculatorView.mainMenuTemplate());
 	}
 	
+	public static void showQuitMessage() {
+		System.out.println(CalculatorView.quitTemplate());
+	}
+	
 	public static void showResult(MathOperation mathOperation){
 		Operation operation = Operation.fromOperationName(mathOperation.getOperationType());
 		
@@ -33,7 +37,7 @@ public class CalculatorView {
 		Optional<String> optional = Optional.ofNullable(message);
 		message = optional.orElse("Erro inesperado.");
 		
-		System.out.println("Erro: "+ message + "\n");
+		System.out.println("\nErro: "+ message);
 	}
 	
 	public static void print(String message) {
@@ -77,6 +81,15 @@ public class CalculatorView {
 				"  |_____|_____|_____|_____|\n";
 	}
 	
+	
+	private static String quitTemplate() {
+		return  "  *****************************************************************************************************\n" +
+				"  |                                                                                                   |\n" +
+				"  |                      OBRIGADO POR UTILIZAR A CALCULADORA DIGITAL. ATÉ LOGO!                       |\n" +
+				"  |                                                                                                   |\n" +
+				"  *****************************************************************************************************\n" +
+				"  Programa Encerrado... ";
+	}
 	
 
 }
