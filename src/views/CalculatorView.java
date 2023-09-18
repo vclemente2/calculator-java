@@ -8,12 +8,12 @@ import models.MathOperation;
 
 public class CalculatorView {
 	
-	public static void showCalculator() {
-		System.out.println(CalculatorView.template());
+	public static void showCalculatorMenu() {
+		System.out.println(CalculatorView.calculatorTemplate());
 	}
 	
-	public static void showUsageOrientation() {
-		System.out.print(CalculatorView.usageOrientation());
+	public static void showMainMenu() {
+		System.out.print(CalculatorView.mainMenuTemplate());
 	}
 	
 	public static void showResult(MathOperation mathOperation) {
@@ -43,26 +43,30 @@ public class CalculatorView {
 		System.out.println(message);
 	}
 	
-	private static String usageOrientation() {
+	private static String mainMenuTemplate() {
 		return  "  *****************************************************************************************************\n" +
 	            "  |                                                                                                   |\n" +
 				"  |                   		        CALCULADORA DIGITAL                                           |\n" +
 	            "  |                                                                                                   |\n" +
 				"  *****************************************************************************************************\n" +
 				"  | Orientações:                                                                                      |\n" +
-				"  | - Digite o primeiro número e tecle \"Enter\"                                                        |\n" +
-				"  | - Digite o simbolo da operação (+, -, / ou *) e tecle \"Enter\"                                     |\n" +
-				"  | - Digite o segundo número e tecle \"Enter\" para visualizar o resultado no terminal.                |\n" +
-				"  | - Para visualizar o histórico de operações digite \"H\"                                             |\n" +
-				"  | - Para limpar os dados armazenados em memória digite \"C\"                                          |\n" +
-				"  *****************************************************************************************************\n";
+				"  | - Para iniciar a calculadora digite \"I\".                                                          |\n" +
+				"  | - Para visualizar o histórico de operações digite \"H\".                                            |\n" +
+				"  | - Para limpar o histórico de operações digite \"C\".                                                |\n" +
+				"  | - Para encerrar o programa digite \"Q\".                                                            |\n" +
+				"  *****************************************************************************************************\n" +
+				"   ___________________________\n" +
+				"  |   Init (I)  |  Clear (C)  |\n" +
+				"  |_____________|_____________|\n" +
+				"  | History (H) |   Quit (Q)  |\n" +
+				"  |_____________|_____________|\n";
 	}
 	
-	private static String template() {
+	private static String calculatorTemplate() {
 		return 	"  *****************************************************************************************************\n" +
 				"  | Orientações:                                                                                      |\n" +
-				"  | - Digite o primeiro número e tecle \"Enter\"                                                        |\n" +
-				"  | - Digite o simbolo da operação (+, -, / ou *) e tecle \"Enter\"                                     |\n" +
+				"  | - Digite o primeiro número e tecle \"Enter\".                                                       |\n" +
+				"  | - Digite o simbolo da operação (+, -, / ou *) e tecle \"Enter\".                                    |\n" +
 				"  | - Digite o segundo número e tecle \"Enter\" para visualizar o resultado no terminal.                |\n" +
 				"  *****************************************************************************************************\n" +
 				"   _______________________\n" +

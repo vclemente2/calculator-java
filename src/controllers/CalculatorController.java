@@ -22,10 +22,14 @@ public class CalculatorController {
 		boolean running = true;
 		
 		while(running) {
-			CalculatorView.showUsageOrientation();
+			CalculatorView.showMainMenu();
 			
+//			
+//			switch() {
+//			case
+//			}
 			
-			CalculatorView.showCalculator();
+			CalculatorView.showCalculatorMenu();
 			String[] operationData = controller.askInput();
 			controller.performOperation(Double.valueOf(operationData[0]), Double.valueOf(operationData[1]), operationData[2]);
 			CalculatorView.showResult(controller.calculator.getCurrentOperation());
@@ -73,6 +77,7 @@ public class CalculatorController {
 		}
 	}	
 	
+
 	public void performOperation(double firstNumber, double secondNumber, String operationSymbol) {
 		switch(operationSymbol) {
 			case "+":
