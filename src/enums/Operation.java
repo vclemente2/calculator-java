@@ -1,5 +1,7 @@
 package enums;
 
+import exceptions.InvalidOperationException;
+
 public enum Operation {
 	ADD("+"),
 	SUBTRACT("-"),
@@ -18,7 +20,7 @@ public enum Operation {
 				return operation;
 			}
 		}
-		throw new IllegalArgumentException("Operação não encontrada para o símbolo: " + operationSymbol);
+		throw new InvalidOperationException(operationSymbol.charAt(0));
 	}
 	
 	public static Operation fromOperationName(String operationName) {
@@ -27,7 +29,7 @@ public enum Operation {
 				return operation;
 			}
 		}
-		throw new IllegalArgumentException("Operação não encontrada para o nome: " + operationName);
+		throw new InvalidOperationException(operationName);
 	}
 	
 	public static boolean validadeSymbol(String symbol) {
