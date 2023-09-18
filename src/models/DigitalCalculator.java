@@ -1,5 +1,6 @@
 package models;
 
+import java.text.DecimalFormat;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
@@ -14,21 +15,21 @@ public class DigitalCalculator extends Calculator{
 	@Override
 	public void add(double firstNumber, double secondNumber) {
 		super.add(firstNumber, secondNumber);
-		this.setCurrentOperation(MathOperation.generate(firstNumber, secondNumber, this.getResult(), "add"));
+		this.setCurrentOperation(MathOperation.generate(firstNumber, secondNumber, this.round(this.getResult()), "add"));
 		this.insertInResultHistory(this.getCurrentOperation());
 	}
 	
 	@Override
 	public void subtract(double firstNumber, double secondNumber) {
 		super.subtract(firstNumber, secondNumber);
-		this.setCurrentOperation(MathOperation.generate(firstNumber, secondNumber, this.getResult(), "subtract"));
+		this.setCurrentOperation(MathOperation.generate(firstNumber, secondNumber, this.round(this.getResult()), "subtract"));
 		this.insertInResultHistory(this.getCurrentOperation());
 	}
 	
 	@Override
 	public void multiply(double firstNumber, double secondNumber) {
 		super.multiply(firstNumber, secondNumber);
-		this.setCurrentOperation(MathOperation.generate(firstNumber, secondNumber, this.getResult(), "multiply"));
+		this.setCurrentOperation(MathOperation.generate(firstNumber, secondNumber, this.round(this.getResult()), "multiply"));
 		this.insertInResultHistory(this.getCurrentOperation());
 	}
 	
@@ -36,7 +37,7 @@ public class DigitalCalculator extends Calculator{
 	public void divide(double firstNumber, double secondNumber) throws ArithmeticException{
 		try {
 			super.divide(firstNumber, secondNumber);
-			this.setCurrentOperation(MathOperation.generate(firstNumber, secondNumber, this.getResult(), "divide"));
+			this.setCurrentOperation(MathOperation.generate(firstNumber, secondNumber, this.round(this.getResult()), "divide"));
 			this.insertInResultHistory(this.getCurrentOperation());
 		} catch(ArithmeticException e) {
 			throw e;
@@ -45,6 +46,10 @@ public class DigitalCalculator extends Calculator{
 	
 	public void clearResultHistory() {
 		this.getResultHistory().removeAll(getResultHistory());
+	}
+	
+	private double round(double number) {
+		return Math.round(number * 1000.0) / 1000.0;
 	}
 	
 	private void insertInResultHistory(MathOperation operation) {
