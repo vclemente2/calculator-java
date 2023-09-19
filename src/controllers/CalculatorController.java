@@ -71,11 +71,14 @@ public class CalculatorController{
 		case "q":
 			this.performOptionQuit();
 			stop = true;
+			break;
+		default:
+			CalculatorView.showMainMenu();
 		}
 		return stop;
 	}
 	
-	private String askMainMenuInput() {
+	public String askMainMenuInput() {
 		while(true) {
 			try {
 				CalculatorView.print("Digite uma das opções do menu:");
@@ -88,6 +91,7 @@ public class CalculatorController{
 				while(true) {
 					CalculatorView.printExceptionMessage(e.getMessage());
 					this.askEnterToContinue();
+					CalculatorView.showMainMenu();
 					break;
 				}
 			}
