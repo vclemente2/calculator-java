@@ -63,10 +63,10 @@ public class CalculatorView {
 	            "  |                                                                                                   |\n" +
 				"  *****************************************************************************************************\n" +
 				"  | Orientações:                                                                                      |\n" +
-				"  | - Para iniciar a calculadora digite \"I\".                                                          |\n" +
-				"  | - Para visualizar o histórico de operações digite \"H\".                                            |\n" +
-				"  | - Para limpar o histórico de operações digite \"C\".                                                |\n" +
-				"  | - Para encerrar o programa digite \"Q\".                                                            |\n" +
+				"  | - Para iniciar a calculadora digite \"I\" e tecle \"Enter\".                                          |\n" +
+				"  | - Para visualizar o histórico de operações digite \"H\" e tecle \"Enter\".                            |\n" +
+				"  | - Para limpar o histórico de operações digite \"C\" e tecle \"Enter\".                                |\n" +
+				"  | - Para encerrar o programa digite \"Q\" e tecle \"Enter\".                                            |\n" +
 				"  *****************************************************************************************************\n" +
 				"   ___________________________\n" +
 				"  |   Init (I)  |  Clear (C)  |\n" +
